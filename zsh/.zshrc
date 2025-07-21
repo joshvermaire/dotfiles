@@ -28,7 +28,7 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
 
 # -- Bun ---------------------------------------------------------------
-[ -s "/Users/jvermaire/.bun/_bun" ] && source "/Users/jvermaire/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # -- Dotfiles ---------------------------------------------------------------
 source ~/.zsh_profile
