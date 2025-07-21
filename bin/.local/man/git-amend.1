@@ -1,0 +1,42 @@
+.\" Manpage for git-amend
+.TH GIT-AMEND 1 "2025-07-16" "1.0" "Git Amend Subcommand"
+.SH NAME
+git-amend \- amend the most recent commit with staged changes
+.SH SYNOPSIS
+.B git amend
+[\-m \fImessage\fR] [\<extra git-commit flags\>]
+.SH DESCRIPTION
+Rewrites HEAD with your staged changes, optionally replacing the commit message.
+.PP
+When no
+.B \-m
+is given, reuses the previous message.
+.SH OPTIONS
+.TP
+.B \-m \fImessage\fR
+Provide a new commit message.
+.TP
+.B \-\-no-verify
+Bypass pre-commit and commit-msg hooks.
+.TP
+.B \-\-date \fIdate\fR
+Override commit date (e.g. \fI"$(date -R)"\fR).
+.SH EXAMPLES
+.PP
+Stage fixes and amend:
+.RS 4
+.nf
+git add foo.c
+git amend
+.fi
+.RE
+.PP
+Replace message:
+.RS 4
+.nf
+git add bar.c
+git amend -m "Fix bar logic"
+.fi
+.RE
+.SH AUTHOR
+Josh Vermaire <joshvermaire@gmail.com>

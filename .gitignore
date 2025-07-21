@@ -1,0 +1,3 @@
+# Ignore any local env or secret files
+.env.local
+zsh/.zsh_secrets

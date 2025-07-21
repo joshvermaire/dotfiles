@@ -1,0 +1,16 @@
+alias leetcode='open_leetcode'
+alias ts-test='node --loader ts-node/esm'
+
+open_leetcode() {
+    query="$1"
+    url="https://leetcode.com/problemset/?search=$query&page=1"
+    open "$url"
+}
+
+mkcd() { mkdir -p "$1" && cd "$1"; }
+extract() { case "$1" in
+    *.tar.gz|*.tgz) tar -xzf "$1"  ;;
+    *.zip)          unzip "$1"    ;;
+    *) echo "don't know how to extract $1" ;;
+  esac
+}

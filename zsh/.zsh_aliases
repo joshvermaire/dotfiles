@@ -1,0 +1,13 @@
+# git
+alias gs='git status -sb'
+alias gp='git push'
+alias gpf='git push --force-with-lease'
+
+# python
+alias python='python3'
+
+#misc
+alias tf='tail -f'
+
+# tools
+alias json='echo `pbpaste` | python -m json.tool | pbcopy'

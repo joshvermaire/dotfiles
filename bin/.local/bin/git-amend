@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+# handle help before anything else
+if [[ ${1-} =~ ^(-h|--help)$ ]]; then
+  usage; exit 0
+fi
+
+usage() {
+  cat <<'USAGE'
+git amend [-m "message"] [<extra git-commit flags>]
+
+Stage your fixes, then run:
+  git amend                # reuse previous commit message
+  git amend -m "New msg"   # replace message
+  git amend -m "msg" --no-verify --date "$(date -R)"   # pass flags through
+
+Aborts if nothing is staged. Rewrites HEAD only.
+USAGE
+}
+
+# --- option parsing ---------------------------------------------------------
+msg=""
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    -m)  shift; msg=${1-}; shift ;;
+    -h|--help) usage; exit 0 ;;
+    --) shift; break ;;            # stop option parsing
+    *)  break ;;
+  esac
+done
+
+# --- safety guard -----------------------------------------------------------
+if git diff --cached --quiet; then
+  echo "git amend: nothing staged" >&2
+  exit 1
+fi
+
+# --- commit -----------------------------------------------------------------
+if [[ -n $msg ]]; then
+  git commit --amend -m "$msg" "$@"
+else
+  git commit --amend --no-edit "$@"
+fi
