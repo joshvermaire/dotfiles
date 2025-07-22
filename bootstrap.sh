@@ -17,6 +17,7 @@ brew "git"
 brew "stow"
 brew "fzf"
 brew "bat"
+brew "rbenv"
 # brew "ripgrep"
 # brew "starship"
 # cask "warp"
@@ -52,12 +53,13 @@ PLUGIN_DEST="$HOME/.zsh_plugins.zsh"
 
 if [[ -f "$PLUGIN_SRC" ]]; then
   echo "🔧 Compiling Zsh plugins with Antidote…"
-  source "$ANTIDOTE_DIR/antidote.zsh"
-  antidote bundle < "$PLUGIN_SRC" > "$PLUGIN_DEST"
+  if command -v zsh >/dev/null 2>&1; then
+    zsh -c "source $HOME/.antidote/antidote.zsh; antidote bundle < $HOME/.zsh_plugins.txt > $HOME/.zsh_plugins.zsh"
+  else
+    echo 'Zsh is not installed. Please install Zsh first.'
+  fi
   echo "✅ Plugins compiled → $PLUGIN_DEST"
 
-  echo "🔧 Preloading plugin clones…"
-  source "$PLUGIN_DEST"
 else
   echo "⚠️  Missing plugin list: $PLUGIN_SRC"
 fi
